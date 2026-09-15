@@ -136,7 +136,25 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
   border-bottom: 1px solid {LINE} !important;
+  padding-right: 24px !important;
+  padding-left: 12px !important;
   z-index: 99990 !important;
+}}
+[data-testid="stToolbar"],
+[data-testid="stToolbarActions"],
+[data-testid="stStatusWidget"] {{
+  right: 24px !important;
+  top: 8px !important;
+  margin-right: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}}
+[data-testid="stToolbar"] a,
+[data-testid="stToolbarActions"] a,
+[data-testid="stToolbar"] button,
+[data-testid="stToolbarActions"] button {{
+  border-radius: 8px !important;
 }}
 .block-container, [data-testid="stMainBlockContainer"] {{
   max-width: 1320px; padding-top: 1.8rem; padding-bottom: 3rem;
@@ -203,12 +221,13 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 }}
 
 /* ---- sidebar text scale & form grouping proximity ---- */
-[data-testid="stSidebar"] [data-testid="stElementContainer"] {{ margin-bottom: 2px !important; }}
+[data-testid="stSidebar"] [data-testid="stElementContainer"] {{ margin-bottom: 6px !important; }}
 [data-testid="stSidebar"] [data-testid="stElementContainer"]:has([data-testid="stWidgetLabel"]) {{
-  margin-top: 14px !important;
+  margin-top: 10px !important;
+  margin-bottom: 18px !important;
 }}
 [data-testid="stSidebar"] [data-testid="stWidgetLabel"] {{
-  margin-bottom: 3px !important;
+  margin-bottom: 5px !important;
   padding-bottom: 0 !important;
 }}
 [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p,
@@ -349,11 +368,19 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 .sb-brand .s {{ font-size: 10.5px; color: {MUTED}; margin-top: 2px; }}
 .sb-sec {{
   display: flex; align-items: center; gap: 8px;
-  font-size: 10px; font-weight: 800; letter-spacing: .11em;
-  color: {MUTED}; margin: 18px 0 6px 0;
+  font-size: 10.5px; font-weight: 800; letter-spacing: .12em;
+  color: {MUTED}; margin: 28px 0 8px 0 !important;
+  padding-top: 14px;
+  border-top: 1px solid {LINE};
+}}
+[data-testid="stSidebar"] [data-testid="stElementContainer"]:first-of-type .sb-sec,
+.sb-sec:first-of-type {{
+  margin-top: 14px !important;
+  border-top: none !important;
+  padding-top: 0 !important;
 }}
 .sb-sec svg {{ flex: none; }}
-.sb-rule {{ border: none; border-top: 1px solid {LINE}; margin: 16px 0 14px 0; }}
+.sb-rule {{ border: none; border-top: 1px solid {LINE}; margin: 20px 0 16px 0; }}
 .sb-badge {{
   font-size: 11.5px; padding: 9px 12px; border-radius: 8px; margin-top: 14px;
   line-height: 1.45; display: flex; align-items: flex-start; gap: 8px;
@@ -944,6 +971,17 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 .open-panel-btn-wrap {{
   margin-bottom: 14px;
 }}
+/* Hide redundant "Open Side Panel" button on desktop where sidebar is already visible */
+@media (min-width: 992px) {{
+  .open-panel-btn-wrap {{
+    display: none !important;
+  }}
+}}
+@media (max-width: 991px) {{
+  .open-panel-btn-wrap {{
+    display: block !important;
+  }}
+}}
 .open-panel-btn-wrap .stButton > button {{
   background: {CARD} !important;
   border: 1.5px solid {CLAY} !important;
@@ -1379,7 +1417,7 @@ chips = [
     f'<span class="chip {"ok" if TOOL_A_AVAILABLE else "warn"}"><span class="dot"></span>Tool A '
     f'{"ready" if TOOL_A_AVAILABLE else "not wired"}</span>',
     '<span class="chip ok"><span class="dot"></span>Tool B ready</span>',
-    f'<span class="chip neutral"><span class="dot"></span>View {(saved or {}).get("resolved_view") or "—"}</span>',
+    f'<span class="chip neutral"><span class="dot"></span>View {(saved or {}).get("resolved_view") or (view if "view" in locals() else "Auto")}</span>',
     f'<span class="chip neutral"><span class="dot"></span>{date.today().strftime("%d %b %Y")}</span>',
 ]
 st.markdown(
