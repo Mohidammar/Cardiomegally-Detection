@@ -18,9 +18,20 @@ than reconstructing the GNN architecture by hand.
 
 import sys
 from pathlib import Path
+from huggingface_hub import snapshot_download
 
-# Point at the cloned HF Space folder so we can reuse its tested code directly
+# Point at the HF Space folder so we can reuse its tested code directly.
+# On Streamlit Cloud there's no local git-lfs clone, so pull the Space's
+# files down at runtime (once) instead of requiring a pre-existing folder.
 HYBRIDGNET_SPACE_DIR = Path(__file__).parent / "hybridgnet_space"
+
+if not (HYBRIDGNET_SPACE_DIR / "weights" / "weights.pt").exists():
+    snapshot_download(
+        repo_id="ngaggion/Chest-x-ray-HybridGNet-Segmentation",
+        repo_type="space",
+        local_dir=str(HYBRIDGNET_SPACE_DIR),
+    )
+
 sys.path.insert(0, str(HYBRIDGNET_SPACE_DIR))
 
 import numpy as np
