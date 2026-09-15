@@ -25,6 +25,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import streamlit as st
+import streamlit.components.v1 as components
 
 from validation_gate import VisionResult
 from pipeline import process_patient
@@ -806,20 +807,32 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
   justify-content: center !important;
 }}
 
-.mobile-hint-card {{
-  background: {CARD};
-  border: 1px solid {LINE};
-  border-left: 4px solid {CLAY};
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin-bottom: 16px;
-  font-size: 12.5px;
-  color: {SLATE};
-  line-height: 1.5;
-  box-shadow: var(--shadow-1);
+.open-panel-btn-wrap {{
+  margin-bottom: 14px;
 }}
-.mobile-hint-card strong {{
-  color: {INK};
+.open-panel-btn-wrap .stButton > button {{
+  background: {CARD} !important;
+  border: 1.5px solid {CLAY} !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(168, 102, 60, 0.12) !important;
+  padding: 12px 18px !important;
+  min-height: 48px !important;
+  transition: all .18s ease !important;
+}}
+.open-panel-btn-wrap .stButton > button:hover {{
+  background: {BG} !important;
+  border-color: {CLAY_DK} !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(168, 102, 60, 0.2) !important;
+}}
+.open-panel-btn-wrap .stButton > button *,
+.open-panel-btn-wrap .stButton > button p,
+.open-panel-btn-wrap .stButton > button div,
+.open-panel-btn-wrap .stButton > button span {{
+  color: {CLAY_DK} !important;
+  -webkit-text-fill-color: {CLAY_DK} !important;
+  font-weight: 700 !important;
+  font-size: 13.5px !important;
 }}
 </style>
 """
@@ -1078,13 +1091,34 @@ def result_hero_html(report, txt_color, fill_color, sub):
 
 
 # ------------------------------------------------------------------ page ---
+if "sidebar_state" not in st.session_state:
+    st.session_state["sidebar_state"] = "expanded"
+
 st.set_page_config(
     page_title="Cardiomegaly Decision Support",
     page_icon="🫀",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state=st.session_state["sidebar_state"],
 )
 st.markdown(CSS, unsafe_allow_html=True)
+
+if st.session_state.pop("open_sidebar_js", False):
+    components.html(
+        """
+        <script>
+            const pDoc = window.parent.document;
+            const b = pDoc.querySelector('[data-testid="collapsedControl"] button')
+                   || pDoc.querySelector('[data-testid="stSidebarCollapseButton"]')
+                   || pDoc.querySelector('button[kind="headerNoPadding"]')
+                   || pDoc.querySelector('[data-testid="collapsedControl"]');
+            if (b) {
+                b.click();
+            }
+        </script>
+        """,
+        height=0,
+        width=0,
+    )
 
 
 # --------------------------------------------------------------- sidebar ---
@@ -1243,12 +1277,12 @@ if st.session_state.pop("animate", False):
     )
 
 if not results:
-    st.markdown(
-        '<div class="mobile-hint-card">'
-        '<strong>👈 Patient Data & Photo:</strong> Use the <strong>☰</strong> menu button at top-left (or swipe from the left edge) to open the side panel to upload a photo and adjust patient details (Age, Sex, View).'
-        '</div>',
-        unsafe_allow_html=True,
-    )
+    st.markdown('<div class="open-panel-btn-wrap">', unsafe_allow_html=True)
+    if st.button("📷 Patient Data & Photo Menu  —  Open Side Panel ❯", use_container_width=True, key="btn_open_side_panel"):
+        st.session_state["sidebar_state"] = "expanded"
+        st.session_state["open_sidebar_js"] = True
+        st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
 
     left, right = st.columns([1.2, 1], gap="medium")
 
