@@ -159,6 +159,7 @@ def run_tool_a(image_path: str) -> dict:
 
     output = remove_preprocess(output, (h, w, padding)).astype('int')
     RL_mask, LL_mask, H_mask = get_masks(output, original_shape[0], original_shape[1])
+    print(f"DEBUG shapes: original={original_shape}, mask_nonzero_RL={RL_mask.sum()}, LL={LL_mask.sum()}, H={H_mask.sum()}")
 
     lung_mask = np.maximum(RL_mask, LL_mask)
     thorax_width = _max_horizontal_width(lung_mask)
