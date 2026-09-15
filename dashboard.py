@@ -133,8 +133,16 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 [data-baseweb="select"] > div:focus-within, [data-baseweb="base-input"]:focus-within {{
   border-color: {CLAY} !important; box-shadow: 0 0 0 3px {CLAY}2E !important;
 }}
+[data-testid="stNumberInput"] > div {{
+  background: {BG} !important;
+}}
 [data-testid="stNumberInput"] button {{
-  background: {CARD} !important; color: {INK} !important; border-color: {LINE} !important;
+  background: {BG} !important; color: {INK} !important; border-color: {LINE} !important;
+}}
+[data-testid="stNumberInput"] input {{
+  text-align: left !important;
+  padding-left: 14px !important;
+  background: {BG} !important;
 }}
 [data-baseweb="popover"], [data-baseweb="menu"], [data-baseweb="popover"] > div {{
   background: {CARD} !important; border-radius: 12px !important;
@@ -168,11 +176,19 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
   font-size: 13px !important; color: {SLATE} !important;
 }}
 
-/* ---- sidebar text scale: widget labels, options, dropzone ---- */
+/* ---- sidebar text scale & form grouping proximity ---- */
+[data-testid="stSidebar"] [data-testid="stElementContainer"] {{ margin-bottom: 2px !important; }}
+[data-testid="stSidebar"] [data-testid="stElementContainer"]:has([data-testid="stWidgetLabel"]) {{
+  margin-top: 14px !important;
+}}
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"] {{
+  margin-bottom: 3px !important;
+  padding-bottom: 0 !important;
+}}
 [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p,
 [data-testid="stSidebar"] label p {{
   font-size: 11.5px !important; font-weight: 600 !important;
-  color: {MUTED} !important; margin-bottom: 3px !important;
+  color: {MUTED} !important; margin-bottom: 2px !important;
 }}
 [data-testid="stSidebar"] [data-testid="stRadio"] label p,
 [data-testid="stSidebar"] [data-testid="stCheckbox"] label p {{
@@ -252,10 +268,19 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 .hero h1 {{ font-size: 24px; font-weight: 800; color: {INK}; margin: 0; letter-spacing: -.025em; }}
 .hero .sub {{ font-size: 12.5px; color: {MUTED}; margin: 7px 0 0 0; }}
 .chips {{ display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }}
-.chip {{ font-size: 11px; font-weight: 700; padding: 7px 13px; border-radius: 20px; white-space: nowrap; }}
-.chip.ok {{ background: {CLAY}22; color: {CLAY_DK}; }}
-.chip.warn {{ background: {FLAG_BG}; color: {FLAG_TXT}; }}
-.chip.neutral {{ background: {BG}; color: {SLATE}; }}
+.chip {{
+  font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; border: 1px solid {LINE}; color: {SLATE};
+  cursor: default; user-select: none;
+}}
+.chip.ok {{ border-color: {GREEN}55; color: {GREEN}; background: {GREEN}0D; }}
+.chip.warn {{ border-color: {STEEL}55; color: {FLAG_TXT}; background: {FLAG_BG}; }}
+.chip.neutral {{ border-color: {LINE}; color: {MUTED}; background: {BG}; }}
+.chip .dot {{ width: 6px; height: 6px; border-radius: 50%; display: inline-block; }}
+.chip.ok .dot {{ background: {GREEN}; }}
+.chip.warn .dot {{ background: {STEEL}; }}
+.chip.neutral .dot {{ background: {MUTED}; }}
 
 /* ---- HERO RESULT: the one dominant element ---- */
 .result {{
@@ -266,8 +291,15 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 .result .left {{ min-width: 0; }}
 .result .word {{ font-size: 30px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }}
 .result .why {{ font-size: 12.5px; color: {MUTED}; margin-top: 9px; line-height: 1.55; }}
-.result .tags {{ display: flex; gap: 8px; margin-top: 15px; flex-wrap: wrap; }}
-.result .tag {{ font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 9px; }}
+.result .tags {{ display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }}
+.result .tag {{
+  font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 5px;
+  background: transparent; border: 1px solid currentColor;
+  cursor: default; user-select: none; display: inline-flex; align-items: center; gap: 5px;
+}}
+.tag-evidence {{ border-color: {STEEL} !important; color: {STEEL} !important; background: {STEEL}12 !important; }}
+.tag-rule {{ border-color: {MUTED} !important; color: {MUTED} !important; background: transparent !important; }}
+.tag-system {{ border-color: {CLAY} !important; color: {CLAY_DK} !important; background: {CLAY}10 !important; }}
 .result .right {{ text-align: right; flex: none; }}
 .result .big {{
   font-size: 66px; font-weight: 800; line-height: .95; letter-spacing: -.045em;
@@ -292,14 +324,20 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 .sb-sec {{
   display: flex; align-items: center; gap: 8px;
   font-size: 10px; font-weight: 800; letter-spacing: .11em;
-  color: {MUTED}; margin: 16px 0 4px 0;
+  color: {MUTED}; margin: 18px 0 6px 0;
 }}
 .sb-sec svg {{ flex: none; }}
-.sb-rule {{ border: none; border-top: 1px solid {LINE}; margin: 14px 0 12px 0; }}
-.sb-badge {{ font-size: 11px; padding: 10px 12px; border-radius: 11px; margin-top: 10px; line-height: 1.5; }}
-.sb-badge.warn {{ background: {FLAG_BG}; color: {FLAG_TXT}; }}
-.sb-badge.ok {{ background: {CLAY}1F; color: {CLAY_DK}; }}
-[data-testid="stSidebar"] [data-testid="stElementContainer"] {{ margin-bottom: -6px; }}
+.sb-rule {{ border: none; border-top: 1px solid {LINE}; margin: 16px 0 14px 0; }}
+.sb-badge {{
+  font-size: 11.5px; padding: 9px 12px; border-radius: 8px; margin-top: 14px;
+  line-height: 1.45; display: flex; align-items: flex-start; gap: 8px;
+  border: 1px solid {LINE}; background: transparent;
+}}
+.sb-badge.ok {{ border-left: 3px solid {GREEN}; color: {SLATE}; background: {GREEN}0A; }}
+.sb-badge.warn {{ border-left: 3px solid {STEEL}; color: {FLAG_TXT}; background: {FLAG_BG}; }}
+.sb-badge .sb-dot {{ width: 7px; height: 7px; border-radius: 50%; flex: none; margin-top: 4px; }}
+.sb-badge.ok .sb-dot {{ background: {GREEN}; }}
+.sb-badge.warn .sb-dot {{ background: {STEEL}; }}
 
 /* patient */
 .pt-head {{ display: flex; align-items: center; gap: 13px; margin-bottom: 14px; }}
@@ -334,15 +372,116 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 }}
 .bar-note {{ font-size: 10.5px; color: {MUTED}; margin-top: 2px; }}
 
+/* primary metric highlight (Issue 3) */
+.bar-row.primary-metric {{
+  background: rgba(168, 102, 60, 0.08);
+  border: 1.5px solid {CLAY}40;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 6px -4px 14px -4px;
+}}
+.bar-row.primary-metric .bar-val {{
+  font-size: 16px !important;
+  font-weight: 800 !important;
+}}
+.bar-row.primary-metric .bar-lab {{
+  font-weight: 700 !important;
+  color: {INK} !important;
+}}
+.bar-row.primary-metric .bar-track {{
+  height: 10px !important;
+}}
+.primary-tag {{
+  font-size: 9.5px;
+  font-weight: 800;
+  color: {CLAY_DK};
+  background: {CLAY}22;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+}}
+
+/* bar scale header axis (Issue 12) */
+.bar-scale-header {{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: {MUTED};
+  padding: 0 46px 6px 0;
+  border-bottom: 1px dashed {LINE};
+  margin-bottom: 12px;
+}}
+.bar-scale-header span {{
+  font-variant-numeric: tabular-nums;
+}}
+.bar-scale-footer {{
+  font-size: 10.5px;
+  font-weight: 600;
+  color: {MUTED};
+  margin-top: 10px;
+  line-height: 1.4;
+}}
+
+/* desktop card height alignment (Issue 2) */
+@media (min-width: 901px) {{
+  [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]) {{
+    align-items: stretch !important;
+  }}
+  .card-fill-height {{
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }}
+}}
+
 /* gauge */
 .gauge-wrap {{ display: flex; justify-content: center; padding: 2px 0; }}
 .gauge-cap {{ text-align: center; font-size: 11.5px; color: {MUTED}; margin-top: 8px; }}
 .gauge-wrap line {{ animation: tick .5s ease-out both; }}
 
 .rationale {{ font-size: 13px; line-height: 1.7; color: {SLATE}; }}
-.legend {{ display: flex; gap: 18px; margin-top: 4px; padding: 0 4px; }}
-.legend .item {{ display: flex; align-items: center; gap: 7px; font-size: 11.5px; color: {MUTED}; }}
-.legend .sw {{ width: 11px; height: 11px; border-radius: 4px; }}
+
+/* legend (Issues 9 & 10) */
+.legend {{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  margin: 12px 0 14px 0;
+  padding: 8px 14px;
+  background: rgba(0, 0, 0, 0.025);
+  border-radius: 8px;
+  border: 1px solid {LINE};
+}}
+.legend .item {{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: {SLATE};
+}}
+.legend .sw {{
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border-width: 2px;
+  border-style: solid;
+  display: inline-block;
+  flex: none;
+}}
+.legend .sw.lung {{
+  border-color: #6FA8C4;
+  background: rgba(111, 168, 196, 0.35);
+}}
+.legend .sw.heart {{
+  border-color: #E0705E;
+  background: rgba(224, 112, 94, 0.35);
+}}
 
 /* gate table */
 .gate {{ width: 100%; border-collapse: collapse; font-size: 12.5px; }}
@@ -434,6 +573,223 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 }}
 [data-testid="stSidebar"] .stButton button p,
 [data-testid="stSidebar"] .stButton button {{ font-size: 13px !important; }}
+
+/* ============================ responsive design ============================ */
+@media (max-width: 900px) {{
+  .block-container, [data-testid="stMainBlockContainer"] {{
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 0.8rem !important;
+    padding-bottom: 2rem !important;
+  }}
+  [data-testid="stHorizontalBlock"] {{
+    flex-direction: column !important;
+    gap: 14px !important;
+  }}
+  [data-testid="stHorizontalBlock"] > [data-testid="column"] {{
+    width: 100% !important;
+    min-width: 100% !important;
+    flex: 1 1 100% !important;
+  }}
+}}
+
+@media (max-width: 600px) {{
+  .block-container, [data-testid="stMainBlockContainer"] {{
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }}
+  .card {{
+    padding: 16px 14px !important;
+    border-radius: 14px !important;
+    margin-bottom: 12px !important;
+  }}
+  [data-testid="stVerticalBlockBorderWrapper"] {{
+    border-radius: 14px !important;
+    padding: 4px 2px !important;
+  }}
+}}
+
+@media (max-width: 768px) {{
+  .hero {{
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 16px 18px !important;
+    gap: 12px !important;
+    border-radius: 14px !important;
+  }}
+  .hero h1 {{
+    font-size: 20px !important;
+    line-height: 1.25 !important;
+  }}
+  .hero .sub {{
+    font-size: 11.5px !important;
+    margin-top: 4px !important;
+  }}
+  .chips {{
+    justify-content: flex-start !important;
+    width: 100% !important;
+    gap: 6px !important;
+  }}
+  .chip {{
+    font-size: 10.5px !important;
+    padding: 5px 10px !important;
+  }}
+
+  .result {{
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 18px 18px !important;
+    gap: 16px !important;
+    border-radius: 16px !important;
+  }}
+  .result .word {{
+    font-size: 24px !important;
+    line-height: 1.2 !important;
+    word-break: break-word !important;
+  }}
+  .result .why {{
+    font-size: 12px !important;
+    margin-top: 6px !important;
+  }}
+  .result .tags {{
+    gap: 6px !important;
+    margin-top: 12px !important;
+  }}
+  .result .tag {{
+    font-size: 10.5px !important;
+    padding: 5px 10px !important;
+  }}
+  .result .right {{
+    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    border-top: 1px solid {LINE} !important;
+    padding-top: 14px !important;
+    margin-top: 4px !important;
+    width: 100% !important;
+  }}
+  .result .big {{
+    font-size: 44px !important;
+    line-height: 1 !important;
+  }}
+  .result .big .u {{
+    font-size: 22px !important;
+  }}
+  .result .cap {{
+    font-size: 10px !important;
+    margin-top: 6px !important;
+  }}
+  .result .delta {{
+    font-size: 12px !important;
+    margin-top: 4px !important;
+  }}
+}}
+
+.gauge-wrap {{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 4px 0 !important;
+  width: 100% !important;
+}}
+.gauge-wrap svg, .radial-gauge-svg {{
+  max-width: 200px !important;
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}}
+
+@media (max-width: 600px) {{
+  .bar-row {{
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+  }}
+  .bar-badge {{
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 11.5px !important;
+    border-radius: 10px !important;
+  }}
+  .bar-val {{ font-size: 13px !important; }}
+  .bar-lab {{ font-size: 11px !important; }}
+  .bar-sub {{ font-size: 10px !important; }}
+}}
+
+.gate-table-wrapper {{
+  width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}}
+@media (max-width: 600px) {{
+  .gate td {{
+    padding: 9px 6px !important;
+    font-size: 11.5px !important;
+  }}
+  .gate td.st {{
+    width: 50px !important;
+    min-width: 46px !important;
+  }}
+  .gate td.nm {{
+    white-space: normal !important;
+    min-width: 110px !important;
+    font-size: 11.5px !important;
+  }}
+  .gate td.dt {{
+    font-size: 11px !important;
+  }}
+  .gate .tag {{
+    font-size: 9px !important;
+    padding: 3px 6px !important;
+  }}
+}}
+
+.pt-when {{
+  max-width: 100% !important;
+  word-break: break-all !important;
+}}
+
+.legend {{
+  flex-wrap: wrap !important;
+  gap: 10px 16px !important;
+}}
+
+[data-testid="collapsedControl"] {{
+  background: {CARD} !important;
+  border: 1px solid {LINE} !important;
+  border-radius: 10px !important;
+  box-shadow: var(--shadow-1) !important;
+  margin: 6px !important;
+  padding: 4px 6px !important;
+}}
+[data-testid="collapsedControl"] svg {{
+  fill: {CLAY} !important;
+  stroke: {CLAY} !important;
+}}
+
+.stButton > button, [data-testid="stDownloadButton"] > button {{
+  min-height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}}
+
+.mobile-hint-card {{
+  background: {CARD};
+  border: 1px solid {LINE};
+  border-left: 4px solid {CLAY};
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 12.5px;
+  color: {SLATE};
+  line-height: 1.5;
+  box-shadow: var(--shadow-1);
+}}
+.mobile-hint-card strong {{
+  color: {INK};
+}}
 </style>
 """
 
@@ -529,8 +885,8 @@ def build_overlay_fig(image, mask):
             continue
         m = m.astype(float)
         ax.imshow(np.ma.masked_where(m < 0.5, m), cmap=ListedColormap([color]),
-                  alpha=0.24, vmin=0, vmax=1)
-        ax.contour(m, levels=[0.5], colors=[color], linewidths=1.5)
+                  alpha=0.28, vmin=0, vmax=1)
+        ax.contour(m, levels=[0.5], colors=[color], linewidths=1.8)
 
     ax.axis("off")
     fig.subplots_adjust(left=0.035, right=0.965, top=0.965, bottom=0.035)
@@ -590,7 +946,7 @@ def radial_gauge_svg(value, threshold, color, dim=False):
 
     centre = _fmt_pct(threshold) or "—"
     return (
-        f'<div class="gauge-wrap"><svg width="{size}" height="{size}" viewBox="0 0 {size} {size}">'
+        f'<div class="gauge-wrap"><svg class="radial-gauge-svg" width="{size}" height="{size}" viewBox="0 0 {size} {size}" style="max-width:200px;width:100%;height:auto;display:block;">'
         f'{"".join(ticks)}'
         f'<text x="{cx}" y="{cy - 2}" text-anchor="middle" font-size="10" font-weight="800" '
         f'letter-spacing="1.2" fill="{MUTED}">THRESHOLD</text>'
@@ -599,26 +955,33 @@ def radial_gauge_svg(value, threshold, color, dim=False):
     )
 
 
-def bar_row(label, value, badge, color, threshold=None):
+def bar_row(label, value, badge, default_color, threshold=None, is_primary=False):
     f = _frac(value)
     shown = _fmt_pct(value)
     v, t = _num(value), _num(threshold)
-    fill = "" if f is None else f"width:{f * 100:.1f}%; background:{color};"
-    val_cls = "bar-val" if shown else "bar-val na"
-    badge_bg = color if shown else "#C9D2E4"
 
+    # Issue 11: Consistent threshold-aware color across metrics
     if v is not None and t is not None:
         d = v - t
+        color = RED if d > 0 else GREEN
         sub = f"{abs(d):.1f} pts {'above' if d >= 0 else 'below'} threshold"
     elif shown:
+        color = default_color
         sub = "decision threshold" if threshold is None and badge == "T" else "&nbsp;"
     else:
+        color = "#C9D2E4"
         sub = "not available"
 
+    fill = "" if f is None else f"width:{f * 100:.1f}%; background:{color};"
+    badge_bg = color if shown else "#C9D2E4"
+    val_cls = "bar-val" if shown else "bar-val na"
+    row_cls = "bar-row primary-metric" if is_primary else "bar-row"
+    primary_tag = '<span class="primary-tag">PRIMARY</span>' if is_primary else ""
+
     return (
-        f'<div class="bar-row"><div class="bar-body">'
+        f'<div class="{row_cls}"><div class="bar-body">'
         f'<div class="bar-top"><span class="{val_cls}">{shown or "N/A"}</span>'
-        f'<span class="bar-lab">{label}</span></div>'
+        f'<span class="bar-lab">{label} {primary_tag}</span></div>'
         f'<div class="bar-track"><div class="bar-fill" style="{fill}"></div></div>'
         f'<div class="bar-sub">{sub}</div>'
         f'</div><div class="bar-badge" style="background:{badge_bg}">{badge}</div></div>'
@@ -641,7 +1004,7 @@ def gate_table_html(checks):
             f'<tr><td class="st"><span class="tag" style="background:{bg};color:{color}">{word}</span></td>'
             f'<td class="nm">{c["name"]}</td><td class="dt">{c["detail"]}</td></tr>'
         )
-    return f'<div class="card" style="padding:10px 16px;"><table class="gate">{rows}</table></div>'
+    return f'<div class="card" style="padding:10px 16px;"><div class="gate-table-wrapper"><table class="gate">{rows}</table></div></div>'
 
 
 def result_hero_html(report, txt_color, fill_color, sub):
@@ -651,13 +1014,16 @@ def result_hero_html(report, txt_color, fill_color, sub):
     rule = getattr(report, "rule_id", None)
     diff = _num(getattr(report, "tool_agreement_pct_diff", None))
 
-    tags = ""
-    for text in filter(None, [
-        f"Evidence tier {tier}" if tier else None,
-        f"Rule {rule}" if rule else None,
-        f"Tool agreement Δ {diff:.1f} pts" if diff is not None else "Tool agreement unavailable",
-    ]):
-        tags += f'<span class="tag" style="background:{fill_color}1A;color:{txt_color}">{text}</span>'
+    tag_items = []
+    if tier:
+        tag_items.append(f'<span class="tag tag-evidence">Evidence: Tier {tier}</span>')
+    if rule:
+        tag_items.append(f'<span class="tag tag-rule">Rule {rule}</span>')
+    if diff is not None:
+        tag_items.append(f'<span class="tag tag-system">System Agreement: Δ {diff:.1f} pts</span>')
+    else:
+        tag_items.append('<span class="tag tag-system">System: Agreement unavailable</span>')
+    tags = "".join(tag_items)
 
     if resolved is not None:
         whole, frac_part = f"{resolved:.1f}".split(".")
@@ -681,7 +1047,12 @@ def result_hero_html(report, txt_color, fill_color, sub):
 
 
 # ------------------------------------------------------------------ page ---
-st.set_page_config(page_title="Cardiomegaly Decision Support", page_icon="🫀", layout="wide")
+st.set_page_config(
+    page_title="Cardiomegaly Decision Support",
+    page_icon="🫀",
+    layout="wide",
+    initial_sidebar_state="auto",
+)
 st.markdown(CSS, unsafe_allow_html=True)
 
 
@@ -689,6 +1060,9 @@ st.markdown(CSS, unsafe_allow_html=True)
 image_path = None
 preview_name = None
 is_dicom = False
+
+sample_paths = _load_sample_paths()
+source_options = ["Use a sample image", "Upload my own"] if sample_paths else ["Upload my own"]
 
 with st.sidebar:
     st.markdown(
@@ -699,16 +1073,19 @@ with st.sidebar:
     )
 
     st.markdown(f'<div class="sb-sec">{IC_SCAN}IMAGE SOURCE</div>', unsafe_allow_html=True)
-    sample_paths = _load_sample_paths()
+    if "source_mode" not in st.session_state:
+        st.session_state["source_mode"] = source_options[0]
+
     source_mode = st.radio(
         "Image source",
-        ["Upload my own", "Use a sample image"] if sample_paths else ["Upload my own"],
+        source_options,
+        key="source_mode",
         label_visibility="collapsed",
     )
 
-    if source_mode == "Use a sample image":
+    if source_mode == "Use a sample image" and sample_paths:
         sample_labels = [os.path.basename(p) for p in sample_paths]
-        chosen_label = st.selectbox("Sample chest X-ray", sample_labels)
+        chosen_label = st.selectbox("Sample chest X-ray", sample_labels, key="sample_label_select")
         image_path = sample_paths[sample_labels.index(chosen_label)]
         preview_name = chosen_label
     else:
@@ -726,24 +1103,22 @@ with st.sidebar:
             is_dicom = suffix.lower() == ".dcm"
 
     st.markdown(f'<div class="sb-sec">{IC_USER}PATIENT DETAILS</div>', unsafe_allow_html=True)
-    age = st.number_input("Age", min_value=0, max_value=120, value=50)
-    gender = st.selectbox("Gender", ["Male", "Female"])
-    ancestry = st.selectbox("Ancestry", ["Non-Caucasian", "Caucasian", "Unspecified"])
+    age = st.number_input("Age", min_value=0, max_value=120, value=50, key="patient_age")
+    gender = st.selectbox("Gender", ["Male", "Female"], key="patient_gender")
+    ancestry = st.selectbox("Ancestry", ["Non-Caucasian", "Caucasian", "Unspecified"], key="patient_ancestry")
 
     st.markdown(f'<div class="sb-sec">{IC_RULER}IMAGE QUALITY</div>', unsafe_allow_html=True)
-    view = st.selectbox("View (Auto trusts Tool B)", ["Auto", "PA", "AP"])
-    inspiration_adequate = st.checkbox("Inspiration adequate", value=True)
-    rotation_acceptable = st.checkbox("Rotation acceptable", value=True)
+    view = st.selectbox("View (Auto trusts Tool B)", ["Auto", "PA", "AP"], key="patient_view")
+    inspiration_adequate = st.checkbox("Inspiration adequate", value=True, key="insp_adequate")
+    rotation_acceptable = st.checkbox("Rotation acceptable", value=True, key="rot_acceptable")
 
     st.markdown('<hr class="sb-rule">', unsafe_allow_html=True)
-    run_button = st.button("Run clinical analysis", type="primary", use_container_width=True)
+    run_button = st.button("Run clinical analysis", type="primary", use_container_width=True, key="sidebar_run_btn")
 
     st.markdown(
-        '<div class="sb-badge ok">Tool A (HybridGNet) ready</div>'
+        '<div class="sb-badge ok"><span class="sb-dot"></span><span>Tool A (HybridGNet) ready</span></div>'
         if TOOL_A_AVAILABLE
-        else '<div class="sb-badge warn">Tool A (HybridGNet) is not wired up yet — '
-        'see extraction_tool_a.py. Running on Tool B only, so cases route to '
-        '“Flag for review” for a missing second estimate.</div>',
+        else '<div class="sb-badge warn"><span class="sb-dot"></span><span>Tool A (HybridGNet) not wired — running on Tool B only. Cases route to “Flag for review”.</span></div>',
         unsafe_allow_html=True,
     )
 
@@ -751,11 +1126,11 @@ with st.sidebar:
 # ------------------------------------------------------------------ hero ---
 saved = st.session_state.get("results")
 chips = [
-    f'<span class="chip {"ok" if TOOL_A_AVAILABLE else "warn"}">Tool A '
+    f'<span class="chip {"ok" if TOOL_A_AVAILABLE else "warn"}"><span class="dot"></span>Tool A '
     f'{"ready" if TOOL_A_AVAILABLE else "not wired"}</span>',
-    '<span class="chip ok">Tool B ready</span>',
-    f'<span class="chip neutral">View {(saved or {}).get("resolved_view") or "—"}</span>',
-    f'<span class="chip neutral">{date.today().strftime("%d %b %Y")}</span>',
+    '<span class="chip ok"><span class="dot"></span>Tool B ready</span>',
+    f'<span class="chip neutral"><span class="dot"></span>View {(saved or {}).get("resolved_view") or "—"}</span>',
+    f'<span class="chip neutral"><span class="dot"></span>{date.today().strftime("%d %b %Y")}</span>',
 ]
 st.markdown(
     f'<div class="hero"><div><h1>Cardiomegaly Decision Support</h1>'
@@ -766,7 +1141,8 @@ st.markdown(
 
 
 # ------------------------------------------------------------ run/analyse ---
-if run_button:
+run_requested = run_button or st.session_state.get("main_run_btn", False)
+if run_requested:
     if image_path is None:
         st.error("Select a sample or upload a chest X-ray before running the analysis.")
         st.stop()
@@ -836,6 +1212,14 @@ if st.session_state.pop("animate", False):
     )
 
 if not results:
+    st.markdown(
+        '<div class="mobile-hint-card">'
+        '<strong>💡 Quick Start:</strong> Tap <strong>▶ Run clinical analysis</strong> below to test the AI decision pipeline on this scan. '
+        'To upload your own scan or customize patient demographics (age, sex, view), open the sidebar with the <strong>☰</strong> / <strong>&gt;</strong> menu button at top-left.'
+        '</div>',
+        unsafe_allow_html=True,
+    )
+
     left, right = st.columns([1.2, 1], gap="medium")
 
     with left:
@@ -844,19 +1228,49 @@ if not results:
             if image_path and not is_dicom:
                 show_image(image_path)
                 st.markdown(f'<div class="preview-cap">{preview_name}</div>', unsafe_allow_html=True)
+                st.markdown(
+                    f'<div style="margin:12px 0 10px 0; font-size:12px; color:{MUTED}; text-align:center;">'
+                    f'Patient: <strong style="color:{INK}">{gender}</strong>, <strong style="color:{INK}">{age} yrs</strong> · '
+                    f'View: <strong style="color:{INK}">{view}</strong> · Ancestry: <strong style="color:{INK}">{ancestry}</strong>'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
+                st.button(
+                    "▶ Run clinical analysis",
+                    type="primary",
+                    use_container_width=True,
+                    key="main_run_btn",
+                )
             elif image_path and is_dicom:
                 st.markdown(
                     f'<div class="ghost">{ribcage_svg()}<div class="cap">'
                     f"DICOM selected — {preview_name}<br>Preview renders after analysis.</div></div>",
                     unsafe_allow_html=True,
                 )
+                st.markdown(
+                    f'<div style="margin:12px 0 10px 0; font-size:12px; color:{MUTED}; text-align:center;">'
+                    f'Patient: <strong style="color:{INK}">{gender}</strong>, <strong style="color:{INK}">{age} yrs</strong> · '
+                    f'View: <strong style="color:{INK}">{view}</strong> · Ancestry: <strong style="color:{INK}">{ancestry}</strong>'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
+                st.button(
+                    "▶ Run clinical analysis",
+                    type="primary",
+                    use_container_width=True,
+                    key="main_run_btn",
+                )
             else:
                 st.markdown(
                     f'<div class="ghost">{ribcage_svg()}<div class="cap">'
-                    "No image selected yet.<br>Pick a sample or upload a file in the sidebar."
+                    "No image selected yet.<br>Pick a sample below or upload a file in the sidebar."
                     "</div></div>",
                     unsafe_allow_html=True,
                 )
+                if sample_paths:
+                    if st.button("🎯 Load sample chest X-ray", use_container_width=True, key="quick_sample_btn"):
+                        st.session_state["source_mode"] = "Use a sample image"
+                        st.rerun()
 
     with right:
         st.markdown(
@@ -889,10 +1303,26 @@ else:
     txt_color, fill_color, default_sub = VERDICT_STYLE.get(report.final_verdict, (INK, CLAY, ""))
     thresh = getattr(report, "threshold_center", None)
 
+    # Top action bar
+    top_col1, top_col2 = st.columns([1, 2], gap="small")
+    with top_col1:
+        if st.button("← Analyze another scan", key="btn_reset_top", use_container_width=True):
+            st.session_state.pop("results", None)
+            st.rerun()
+    with top_col2:
+        st.markdown(
+            f'<div style="text-align:right; font-size:12px; color:{MUTED}; padding-top:10px;">'
+            f'Patient: <strong style="color:{INK}">{results["gender"]}, {results["age"]} yrs</strong> · '
+            f'View: <strong style="color:{INK}">{results["resolved_view"] or "Auto"}</strong> · '
+            f'Ancestry: <strong style="color:{INK}">{results["ancestry"]}</strong>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+
     # ---- the one dominant element ----
     st.markdown(result_hero_html(report, txt_color, fill_color, default_sub), unsafe_allow_html=True)
 
-    col_a, col_b, col_c = st.columns([1, 1.5, 1.05], gap="medium")
+    col_a, col_b, col_c = st.columns([1, 1.4, 1.05], gap="medium")
 
     with col_a:
         initials = (results["gender"][:1] or "?").upper()
@@ -900,7 +1330,7 @@ else:
             '<div class="card"><div class="pt-head">'
             f'<div class="pt-avatar">{initials}{results["age"]}</div>'
             f'<div><div class="pt-name">{results["gender"]}, {results["age"]}</div>'
-            f'<div class="pt-when">{results["source_name"]}</div></div></div>'
+            f'<div class="pt-when" title="{results["source_name"]}">{results["source_name"]}</div></div></div>'
             + kv_html([
                 ("Age", results["age"]),
                 ("Sex", results["gender"]),
@@ -925,10 +1355,10 @@ else:
             fig = build_overlay_fig(result_b["image"], result_b["mask"])
             st.pyplot(fig, use_container_width=True)
             st.markdown(
-                f'<div class="legend">'
-                f'<div class="item"><span class="sw" style="background:{LUNG_C}"></span>Lung fields</div>'
-                f'<div class="item"><span class="sw" style="background:{HEART_C}"></span>Cardiac silhouette</div>'
-                f"</div>",
+                '<div class="legend">'
+                '<div class="item"><span class="sw lung"></span>Lung fields (contour + mask)</div>'
+                '<div class="item"><span class="sw heart"></span>Cardiac silhouette (contour + mask)</div>'
+                '</div>',
                 unsafe_allow_html=True,
             )
             buf = io.BytesIO()
@@ -939,18 +1369,28 @@ else:
                 data=buf.getvalue(),
                 file_name=f"overlay_{results['source_name']}.png",
                 mime="image/png",
+                use_container_width=True,
             )
 
     with col_c:
+        scale_ruler = (
+            f'<div class="bar-scale-header">'
+            f'<span>Scale min {SCALE_MIN:.0f}%</span>'
+            f'<span>50% (Normal Ref)</span>'
+            f'<span>Max {SCALE_MAX:.0f}%</span>'
+            f'</div>'
+        )
         bars = (
             bar_row("Tool A CTR", getattr(vision_a, "ctr", None), "A", CLAY_LT, thresh)
             + bar_row("Tool B CTR", getattr(vision_b, "ctr", None), "B", CLAY, thresh)
-            + bar_row("Resolved CTR", getattr(report, "resolved_ctr", None), "R", fill_color, thresh)
-            + bar_row("Threshold", thresh, "T", INK)
+            + bar_row("Resolved CTR", getattr(report, "resolved_ctr", None), "R", fill_color, thresh, is_primary=True)
+            + bar_row("Decision Threshold", thresh, "T", INK)
         )
         st.markdown(
-            '<div class="card"><p class="eyebrow">MEASUREMENTS</p>' + bars
-            + f'<div class="bar-note">Bars scaled {SCALE_MIN:.0f}–{SCALE_MAX:.0f}%</div></div>',
+            '<div class="card card-fill-height"><p class="eyebrow">MEASUREMENTS</p>'
+            + scale_ruler + bars
+            + f'<div class="bar-scale-footer">'
+            f'<span>⚖️ All bars scaled {SCALE_MIN:.0f}–{SCALE_MAX:.0f}% (non-zero axis). Red marks values exceeding demographic threshold.</span></div></div>',
             unsafe_allow_html=True,
         )
 
@@ -968,3 +1408,7 @@ else:
     disclaimer = getattr(report, "disclaimer", None)
     if disclaimer:
         st.markdown(f'<div class="disclaimer">{disclaimer}</div>', unsafe_allow_html=True)
+
+    if st.button("← Analyze another scan", key="btn_reset_bottom", use_container_width=True):
+        st.session_state.pop("results", None)
+        st.rerun()
