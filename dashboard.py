@@ -586,7 +586,7 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
     max-width: 100% !important;
     padding-left: 1rem !important;
     padding-right: 1rem !important;
-    padding-top: 4.4rem !important;
+    padding-top: 3.4rem !important;
     padding-bottom: 2rem !important;
   }}
   [data-testid="stHorizontalBlock"] {{
@@ -604,7 +604,7 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
   .block-container, [data-testid="stMainBlockContainer"] {{
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
-    padding-top: 4.8rem !important;
+    padding-top: 3.5rem !important;
   }}
   .card {{
     padding: 16px 14px !important;
@@ -621,25 +621,25 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
   .hero {{
     flex-direction: column !important;
     align-items: flex-start !important;
-    padding: 18px 20px !important;
-    gap: 12px !important;
-    border-radius: 16px !important;
-    margin-bottom: 14px !important;
+    padding: 16px 16px !important;
+    gap: 10px !important;
+    border-radius: 14px !important;
+    margin-bottom: 12px !important;
   }}
   .hero h1 {{
-    font-size: 21px !important;
+    font-size: 20px !important;
     font-weight: 800 !important;
     color: {INK} !important;
     line-height: 1.3 !important;
     letter-spacing: -0.02em !important;
-    margin: 0 0 6px 0 !important;
+    margin: 0 0 4px 0 !important;
   }}
   .hero .sub {{
     font-size: 13px !important;
     font-weight: 600 !important;
     color: {SLATE} !important;
     margin: 0 !important;
-    line-height: 1.45 !important;
+    line-height: 1.4 !important;
     opacity: 1 !important;
   }}
   .chips {{
@@ -650,9 +650,12 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
   }}
   .chip {{
     font-size: 11px !important;
-    font-weight: 600 !important;
-    padding: 5px 10px !important;
-    border-radius: 7px !important;
+    font-weight: 700 !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    color: {INK} !important;
+    background: #FFFFFF !important;
+    border: 1px solid {LINE} !important;
   }}
   .top-patient-info {{
     text-align: left !important;
@@ -781,108 +784,19 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 
 [data-testid="collapsedControl"] {{
   background: {CARD} !important;
-  border: 1px solid {LINE} !important;
+  border: 1.5px solid {CLAY} !important;
   border-radius: 10px !important;
   box-shadow: var(--shadow-1) !important;
   margin: 6px !important;
-  padding: 4px 6px !important;
+  padding: 5px 8px !important;
+  cursor: pointer !important;
+  z-index: 99999 !important;
 }}
 [data-testid="collapsedControl"] svg {{
   fill: {CLAY} !important;
   stroke: {CLAY} !important;
-}}
-
-/* Mobile floating slide tab on header */
-@media (max-width: 900px) {{
-  [data-testid="collapsedControl"] {{
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    background: {CARD} !important;
-    border: 1.5px solid {CLAY}80 !important;
-    border-radius: 20px !important;
-    padding: 5px 12px 5px 8px !important;
-    margin: 6px 8px !important;
-    box-shadow: 0 2px 8px rgba(31, 45, 74, 0.12) !important;
-    cursor: pointer !important;
-    height: 34px !important;
-  }}
-  [data-testid="collapsedControl"] button {{
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-  }}
-  [data-testid="collapsedControl"] button::after,
-  [data-testid="stSidebarCollapseButton"]::after {{
-    content: "Slide to open panel";
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    color: {CLAY_DK} !important;
-    letter-spacing: 0.02em !important;
-    white-space: nowrap !important;
-  }}
-}}
-
-/* ---- In-page slide-to-open panel styles ---- */
-.slide-panel-wrapper {{
-  margin-bottom: 16px;
-}}
-.slide-panel-wrapper [data-testid="stExpander"] {{
-  background: {CARD} !important;
-  border: 1.5px solid {CLAY}60 !important;
-  border-radius: 16px !important;
-  box-shadow: 0 4px 14px rgba(168, 102, 60, 0.08) !important;
-  overflow: hidden !important;
-  transition: all .2s ease !important;
-}}
-.slide-panel-wrapper [data-testid="stExpander"]:hover {{
-  border-color: {CLAY} !important;
-  box-shadow: 0 6px 20px rgba(168, 102, 60, 0.14) !important;
-}}
-.slide-panel-wrapper [data-testid="stExpander"] summary {{
-  background: linear-gradient(115deg, {CARD} 0%, {CARD} 65%, {CLAY}12 100%) !important;
-  padding: 13px 18px !important;
-  min-height: 48px !important;
-  border-radius: 14px !important;
-  cursor: pointer !important;
-}}
-.slide-panel-wrapper [data-testid="stExpander"] summary:hover {{
-  background: linear-gradient(115deg, {CARD} 0%, {CARD} 55%, {CLAY}1E 100%) !important;
-}}
-.slide-panel-wrapper [data-testid="stExpander"] summary p,
-.slide-panel-wrapper [data-testid="stExpander"] summary span {{
-  font-size: 13.5px !important;
-  font-weight: 700 !important;
-  color: {INK} !important;
-}}
-.slide-panel-wrapper [data-testid="stExpander"] svg {{
-  color: {CLAY} !important;
-  fill: {CLAY} !important;
-}}
-.slide-panel-wrapper [data-testid="stExpanderDetails"] {{
-  background: {CARD} !important;
-  border-top: 1px solid {LINE} !important;
-  padding: 16px 18px 20px 18px !important;
-}}
-.panel-status-strip {{
-  font-size: 12px;
-  color: {SLATE};
-  background: {BG};
-  border: 1px solid {LINE};
-  border-radius: 10px;
-  padding: 8px 12px;
-  margin-top: 10px;
-  margin-bottom: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
-  align-items: center;
-}}
-.panel-status-strip strong {{
-  color: {INK};
+  width: 18px !important;
+  height: 18px !important;
 }}
 
 .stButton > button, [data-testid="stDownloadButton"] > button {{
@@ -1168,7 +1082,7 @@ st.set_page_config(
     page_title="Cardiomegaly Decision Support",
     page_icon="🫀",
     layout="wide",
-    initial_sidebar_state="auto",
+    initial_sidebar_state="expanded",
 )
 st.markdown(CSS, unsafe_allow_html=True)
 
@@ -1257,176 +1171,16 @@ st.markdown(
 )
 
 
-# ----------------------------- slide-to-open panel (mobile & quick access) ---
-st.markdown('<div class="slide-panel-wrapper">', unsafe_allow_html=True)
-with st.expander("📷 **Slide to open panel: Add photo & select patient data**", expanded=False):
-    st.markdown(
-        f'<div style="font-size:12.5px; color:{SLATE}; margin-bottom:12px; line-height:1.5;">'
-        f'Upload an X-ray scan or choose a sample, set patient demographics, and run the clinical analysis directly from your phone.'
-        f'</div>',
-        unsafe_allow_html=True,
-    )
-
-    p_col_src, p_col_dem = st.columns([1.1, 1], gap="medium")
-    with p_col_src:
-        st.markdown(f'<div class="sb-sec" style="margin-top:0;">{IC_SCAN}IMAGE / PHOTO SOURCE</div>', unsafe_allow_html=True)
-        panel_source_mode = st.radio(
-            "Photo source mode",
-            source_options,
-            key="panel_source_mode",
-            horizontal=True,
-            label_visibility="collapsed",
-        )
-        panel_uploaded = None
-        panel_sample_label = None
-        panel_image_path = None
-        panel_preview_name = None
-        panel_is_dicom = False
-
-        if panel_source_mode == "Use a sample image" and sample_paths:
-            panel_sample_labels = [os.path.basename(p) for p in sample_paths]
-            panel_sample_label = st.selectbox(
-                "Select sample photo",
-                panel_sample_labels,
-                key="panel_sample_select",
-            )
-            panel_image_path = sample_paths[panel_sample_labels.index(panel_sample_label)]
-            panel_preview_name = panel_sample_label
-        else:
-            panel_uploaded = st.file_uploader(
-                "Upload chest X-ray photo (jpg / png / dcm)",
-                type=["jpg", "jpeg", "png", "dcm"],
-                key="panel_uploader",
-                help="On mobile devices, tap to take a photo with your camera or select from your gallery.",
-            )
-            if panel_uploaded is not None:
-                p_suffix = "." + panel_uploaded.name.split(".")[-1]
-                with tempfile.NamedTemporaryFile(delete=False, suffix=p_suffix) as p_tmp:
-                    p_tmp.write(panel_uploaded.getbuffer())
-                    panel_image_path = p_tmp.name
-                panel_preview_name = panel_uploaded.name
-                panel_is_dicom = p_suffix.lower() == ".dcm"
-
-    with p_col_dem:
-        st.markdown(f'<div class="sb-sec" style="margin-top:0;">{IC_USER}PATIENT DEMOGRAPHICS</div>', unsafe_allow_html=True)
-        p_c1, p_c2 = st.columns(2)
-        with p_c1:
-            p_age = st.number_input("Age", min_value=0, max_value=120, value=int(age), key="panel_age")
-            p_ancestry = st.selectbox(
-                "Ancestry",
-                ["Non-Caucasian", "Caucasian", "Unspecified"],
-                index=["Non-Caucasian", "Caucasian", "Unspecified"].index(ancestry),
-                key="panel_ancestry",
-            )
-        with p_c2:
-            p_gender = st.selectbox(
-                "Gender",
-                ["Male", "Female"],
-                index=["Male", "Female"].index(gender),
-                key="panel_gender",
-            )
-            p_view = st.selectbox(
-                "Projection View",
-                ["Auto", "PA", "AP"],
-                index=["Auto", "PA", "AP"].index(view),
-                key="panel_view",
-            )
-
-        st.markdown(f'<div class="sb-sec" style="margin-top:10px;">{IC_RULER}QUALITY CHECKS</div>', unsafe_allow_html=True)
-        p_q1, p_q2 = st.columns(2)
-        with p_q1:
-            p_insp = st.checkbox("Inspiration adequate", value=inspiration_adequate, key="panel_insp")
-        with p_q2:
-            p_rot = st.checkbox("Rotation acceptable", value=rotation_acceptable, key="panel_rot")
-
-    disp_photo = panel_preview_name or preview_name or "None selected"
-    disp_pat = f"{p_gender}, {int(p_age)} yrs ({p_view} view)"
-    st.markdown(
-        f'<div class="panel-status-strip">'
-        f'<span>📷 Selected Scan: <strong>{disp_photo}</strong></span>'
-        f'<span>👤 Patient Profile: <strong>{disp_pat}</strong></span>'
-        f'</div>',
-        unsafe_allow_html=True,
-    )
-
-    panel_run_btn = st.button(
-        "▶ Run clinical analysis",
-        type="primary",
-        use_container_width=True,
-        key="panel_run_btn",
-    )
-st.markdown('</div>', unsafe_allow_html=True)
-
-
-# ---------------------------------------- active values resolution ---
-if panel_run_btn:
-    active_image_path = panel_image_path or image_path
-    active_preview_name = panel_preview_name or preview_name
-    active_is_dicom = panel_is_dicom if panel_image_path else is_dicom
-    active_age = int(p_age)
-    active_gender = p_gender
-    active_ancestry = p_ancestry
-    active_view = p_view
-    active_insp = p_insp
-    active_rot = p_rot
-elif run_button:
-    active_image_path = image_path
-    active_preview_name = preview_name
-    active_is_dicom = is_dicom
-    active_age = int(age)
-    active_gender = gender
-    active_ancestry = ancestry
-    active_view = view
-    active_insp = inspiration_adequate
-    active_rot = rotation_acceptable
-else:
-    # Triggered by main_run_btn or rendering pre-run preview
-    if panel_uploaded is not None:
-        active_image_path = panel_image_path
-        active_preview_name = panel_preview_name
-        active_is_dicom = panel_is_dicom
-    elif image_path is not None:
-        active_image_path = image_path
-        active_preview_name = preview_name
-        active_is_dicom = is_dicom
-    else:
-        active_image_path = panel_image_path
-        active_preview_name = panel_preview_name
-        active_is_dicom = panel_is_dicom
-
-    if (
-        p_age != 50
-        or p_gender != "Male"
-        or p_ancestry != "Non-Caucasian"
-        or p_view != "Auto"
-        or not p_insp
-        or not p_rot
-    ):
-        active_age = int(p_age)
-        active_gender = p_gender
-        active_ancestry = p_ancestry
-        active_view = p_view
-        active_insp = p_insp
-        active_rot = p_rot
-    else:
-        active_age = int(age)
-        active_gender = gender
-        active_ancestry = ancestry
-        active_view = view
-        active_insp = inspiration_adequate
-        active_rot = rotation_acceptable
-
-
 # ------------------------------------------------------------ run/analyse ---
-run_requested = run_button or panel_run_btn or st.session_state.get("main_run_btn", False)
+run_requested = run_button or st.session_state.get("main_run_btn", False)
 if run_requested:
-    if active_image_path is None:
+    if image_path is None:
         st.error("Select a sample or upload a chest X-ray before running the analysis.")
         st.stop()
 
     with st.spinner("Running Tool B (ianpan/chest-x-ray-basic)..."):
         try:
-            result_b = run_tool_b(active_image_path)
+            result_b = run_tool_b(image_path)
         except Exception as e:
             st.error(f"Tool B failed: {e}")
             st.stop()
@@ -1435,7 +1189,7 @@ if run_requested:
     if TOOL_A_AVAILABLE:
         with st.spinner("Running Tool A (HybridGNet)..."):
             try:
-                result_a = run_tool_a(active_image_path)
+                result_a = run_tool_a(image_path)
             except NotImplementedError as e:
                 st.warning(str(e))
             except Exception as e:
@@ -1447,25 +1201,25 @@ if run_requested:
     )
     vision_b = result_b["vision_result"]
 
-    resolved_view = active_view if active_view != "Auto" else result_b.get("view")
+    resolved_view = view if view != "Auto" else result_b.get("view")
     dicom_meta = {
-        "age": int(active_age),
-        "gender": active_gender,
+        "age": int(age),
+        "gender": gender,
         "view": resolved_view if resolved_view != "Lateral" else None,
-        "ancestry": None if active_ancestry == "Unspecified" else active_ancestry,
+        "ancestry": None if ancestry == "Unspecified" else ancestry,
     }
 
     report = process_patient(
         dicom_meta, vision_a, vision_b,
-        inspiration_adequate=active_insp,
-        rotation_acceptable=active_rot,
+        inspiration_adequate=inspiration_adequate,
+        rotation_acceptable=rotation_acceptable,
     )
 
     st.session_state["results"] = {
         "report": report, "vision_a": vision_a, "vision_b": vision_b,
         "result_b": result_b, "resolved_view": resolved_view,
-        "age": int(active_age), "gender": active_gender, "ancestry": active_ancestry,
-        "source_name": active_preview_name or os.path.basename(active_image_path),
+        "age": int(age), "gender": gender, "ancestry": ancestry,
+        "source_name": preview_name or os.path.basename(image_path),
     }
     st.session_state["animate"] = True   # entrance plays once, not on every rerun
     st.rerun()
@@ -1491,7 +1245,7 @@ if st.session_state.pop("animate", False):
 if not results:
     st.markdown(
         '<div class="mobile-hint-card">'
-        '<strong>💡 Mobile Quick Start:</strong> Tap <strong>📷 Slide to open panel</strong> above to upload a photo and select patient data, or tap <strong>▶ Run clinical analysis</strong> below to test the active scan.'
+        '<strong>👈 Patient Data & Photo:</strong> Use the <strong>☰</strong> menu button at top-left (or swipe from the left edge) to open the side panel to upload a photo and adjust patient details (Age, Sex, View).'
         '</div>',
         unsafe_allow_html=True,
     )
@@ -1501,33 +1255,19 @@ if not results:
     with left:
         with st.container(border=True):
             st.markdown('<p class="eyebrow">SELECTED IMAGE</p>', unsafe_allow_html=True)
-            if active_image_path and not active_is_dicom:
-                show_image(active_image_path)
-                st.markdown(f'<div class="preview-cap">{active_preview_name}</div>', unsafe_allow_html=True)
-                st.markdown(
-                    f'<div style="margin:12px 0 10px 0; font-size:12px; color:{MUTED}; text-align:center;">'
-                    f'Patient: <strong style="color:{INK}">{active_gender}</strong>, <strong style="color:{INK}">{active_age} yrs</strong> · '
-                    f'View: <strong style="color:{INK}">{active_view}</strong> · Ancestry: <strong style="color:{INK}">{active_ancestry}</strong>'
-                    f'</div>',
-                    unsafe_allow_html=True,
-                )
+            if image_path and not is_dicom:
+                show_image(image_path)
+                st.markdown(f'<div class="preview-cap">{preview_name}</div>', unsafe_allow_html=True)
                 st.button(
                     "▶ Run clinical analysis",
                     type="primary",
                     use_container_width=True,
                     key="main_run_btn",
                 )
-            elif active_image_path and active_is_dicom:
+            elif image_path and is_dicom:
                 st.markdown(
                     f'<div class="ghost">{ribcage_svg()}<div class="cap">'
-                    f"DICOM selected — {active_preview_name}<br>Preview renders after analysis.</div></div>",
-                    unsafe_allow_html=True,
-                )
-                st.markdown(
-                    f'<div style="margin:12px 0 10px 0; font-size:12px; color:{MUTED}; text-align:center;">'
-                    f'Patient: <strong style="color:{INK}">{active_gender}</strong>, <strong style="color:{INK}">{active_age} yrs</strong> · '
-                    f'View: <strong style="color:{INK}">{active_view}</strong> · Ancestry: <strong style="color:{INK}">{active_ancestry}</strong>'
-                    f'</div>',
+                    f"DICOM selected — {preview_name}<br>Preview renders after analysis.</div></div>",
                     unsafe_allow_html=True,
                 )
                 st.button(
@@ -1539,14 +1279,13 @@ if not results:
             else:
                 st.markdown(
                     f'<div class="ghost">{ribcage_svg()}<div class="cap">'
-                    "No image selected yet.<br>Pick a sample below or upload a file in the slide panel above."
+                    "No image selected yet.<br>Pick a sample below or upload a file in the sidebar."
                     "</div></div>",
                     unsafe_allow_html=True,
                 )
                 if sample_paths:
                     if st.button("🎯 Load sample chest X-ray", use_container_width=True, key="quick_sample_btn"):
                         st.session_state["source_mode"] = "Use a sample image"
-                        st.session_state["panel_source_mode"] = "Use a sample image"
                         st.rerun()
 
     with right:
