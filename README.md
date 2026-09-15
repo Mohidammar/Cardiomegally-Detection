@@ -1,5 +1,38 @@
 # Cardiomegaly Clinical Decision Support Dashboard
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Domain-Medical%20AI%20%7C%20Radiology-0052cc.svg?style=for-the-badge&logo=medscape&logoColor=white" alt="Medical AI">
+  <img src="https://img.shields.io/badge/Specialty-Cardiothoracic%20Imaging-a8663c.svg?style=for-the-badge" alt="Cardiothoracic Imaging">
+  <img src="https://img.shields.io/badge/Task-Cardiomegaly%20Detection%20(CTR)-dc2626.svg?style=for-the-badge&logo=heart&logoColor=white" alt="Cardiomegaly Detection">
+  <img src="https://img.shields.io/badge/System-Clinical%20Decision%20Support%20(CDSS)-16a34a.svg?style=for-the-badge" alt="CDSS">
+  <img src="https://img.shields.io/badge/Architecture-Dual%20Ensembled%20(GNN%20%2B%20CNN)-6366f1.svg?style=for-the-badge" alt="Architecture">
+  <img src="https://img.shields.io/badge/Streamlit-1.50.0-ff4b4b.svg?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
+  <img src="https://img.shields.io/badge/PyTorch-2.9.0-ee4c2c.svg?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/Intended%20Use-Research%20%26%20Decision%20Support-0f172a.svg?style=for-the-badge" alt="Intended Use">
+</p>
+
+---
+
+### Medical AI & Clinical Taxonomy Tags
+`#MedicalAI` · `#RadiologyAI` · `#ClinicalDecisionSupport` · `#CardiothoracicImaging` · `#ChestRadiography` · `#Cardiomegaly` · `#CardiothoracicRatio` · `#AnatomicalSegmentation` · `#GraphNeuralNetworks` · `#AlgorithmicFairness` · `#ConsensusVerification` · `#SafetyValidation` · `#ExplainableAI` · `#HumanInTheLoop`
+
+---
+
+### Clinical & Technical System Specifications
+
+| Clinical Attribute | System Specification |
+| :--- | :--- |
+| **Clinical Modality** | Digital & Film-Screen Chest Radiography (CXR: DICOM, PNG, JPEG) |
+| **Pathology Target** | Cardiomegaly (Enlarged Cardiac Silhouette) |
+| **Biomarker** | Cardiothoracic Ratio (**CTR** = Cardiac Width / Thoracic Width) |
+| **Vision Extractors** | Dual Ensembled: **Tool A** (HybridGNet GNN) + **Tool B** (ianpan/chest-x-ray-basic CNN) |
+| **Consensus Threshold** | Inter-tool agreement tolerance $\le 3.0\%$ CTR delta |
+| **Decision Architecture** | **Layer 1**: Demographic-Aware Evidence-Based Threshold Rules (Age, Sex, Ancestry, View)<br>**Layer 2**: Multi-Factor Safety Gate (Inspiration, Quality, Rotation, Confidence) |
+| **Interpretability (XAI)** | Deterministic Rule ID, Evidence Tier (A/B/C), Written Clinical Rationale, Segmentation Mask Overlays |
+| **Intended Clinical Role** | Second-reader Clinical Decision Support System (CDSS) / Radiologist Triage |
+
+---
+
 So here's the deal: this is a demographic-aware decision support tool for spotting cardiomegaly (an enlarged heart) on chest X-rays. You upload an X-ray, punch in some patient info, and the system tells you whether it thinks the heart looks enlarged, normal, or whether a human should just take a look themselves.
 
 It's not trying to replace a radiologist. Think of it as a second pair of (very literal, very consistent) eyes that flags things worth a closer look.
