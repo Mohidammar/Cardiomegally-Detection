@@ -96,6 +96,8 @@ IC_RULER = _icon('<path d="M3 12h18"/><path d="M7 9v6"/><path d="M12 8v8"/><path
 CSS = f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 :root {{
   --bg: {BG}; --card: {CARD}; --line: {LINE}; --ink: {INK};
@@ -103,11 +105,28 @@ CSS = f"""
   --shadow-2: 0 1px 2px rgba(31,45,74,.06), 0 18px 42px -16px rgba(31,45,74,.22);
 }}
 
-/* font has to be forced broadly -- Streamlit sets font-family per element */
+/* Set standard font on text content while preserving icon fonts */
 html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"],
-[data-testid="stSidebar"], button, input, select, textarea, optgroup,
-p, h1, h2, h3, h4, h5, h6, span, div, label, li, td, th {{
-  font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI', Roboto, sans-serif !important;
+[data-testid="stSidebar"], input, select, textarea, optgroup,
+p, h1, h2, h3, h4, h5, h6, label, li, td, th {{
+  font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+}}
+
+/* Ensure Material Symbols are preserved across Streamlit */
+.material-symbols-rounded,
+.material-symbols-outlined,
+.material-symbols-sharp,
+[data-testid="stIconMaterial"],
+[data-testid="stIcon"] {{
+  font-family: 'Material Symbols Rounded', 'Material Symbols Outlined', 'Material Icons' !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  direction: ltr !important;
+  -webkit-font-feature-settings: 'liga' 1 !important;
+  font-feature-settings: 'liga' 1 !important;
+  -webkit-font-smoothing: antialiased !important;
 }}
 html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {{
   background: {BG} !important; color: {SLATE} !important; color-scheme: light !important;
@@ -783,21 +802,136 @@ html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
   gap: 10px 16px !important;
 }}
 
+/* Sidebar collapsed open button in top navbar */
 [data-testid="collapsedControl"] {{
-  background: {CARD} !important;
+  display: flex !important;
+  align-items: center !important;
+  visibility: visible !important;
+  z-index: 999999 !important;
+  margin: 6px 10px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}}
+
+[data-testid="collapsedControl"] button {{
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: #FFFFFF !important;
   border: 1.5px solid {CLAY} !important;
   border-radius: 10px !important;
-  box-shadow: var(--shadow-1) !important;
-  margin: 6px !important;
-  padding: 5px 8px !important;
+  box-shadow: 0 2px 8px rgba(168, 102, 60, 0.16) !important;
+  padding: 7px 14px !important;
+  min-height: 40px !important;
   cursor: pointer !important;
-  z-index: 99999 !important;
+  transition: all 0.18s ease-in-out !important;
+  outline: none !important;
 }}
-[data-testid="collapsedControl"] svg {{
-  fill: {CLAY} !important;
-  stroke: {CLAY} !important;
+
+[data-testid="collapsedControl"] button:hover {{
+  background: {BG} !important;
+  border-color: {CLAY_DK} !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(168, 102, 60, 0.24) !important;
+}}
+
+/* 100% eliminate raw ligature text like 'keyboard_double_arrow_right' */
+[data-testid="collapsedControl"] button span,
+[data-testid="collapsedControl"] span {{
+  display: none !important;
+  font-size: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+}}
+
+/* Crisp double-chevron SVG icon */
+[data-testid="collapsedControl"] button::before {{
+  content: "" !important;
+  display: inline-block !important;
   width: 18px !important;
   height: 18px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23A8663C' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m13 17 5-5-5-5'/%3E%3Cpath d='m6 17 5-5-5-5'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+}}
+
+/* Professional button label */
+[data-testid="collapsedControl"] button::after {{
+  content: "Patient & Photo Menu" !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: {CLAY_DK} !important;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}}
+
+@media (max-width: 600px) {{
+  [data-testid="collapsedControl"] {{
+    margin: 4px 6px !important;
+  }}
+  [data-testid="collapsedControl"] button {{
+    padding: 6px 10px !important;
+    min-height: 36px !important;
+    gap: 6px !important;
+  }}
+  [data-testid="collapsedControl"] button::after {{
+    content: "Menu" !important;
+    font-size: 12.5px !important;
+  }}
+}}
+
+/* Sidebar close button inside the sidebar */
+[data-testid="stSidebarCollapseButton"] button {{
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  background: {BG} !important;
+  border: 1px solid {LINE} !important;
+  border-radius: 8px !important;
+  padding: 5px 10px !important;
+  min-height: 32px !important;
+  cursor: pointer !important;
+  transition: all 0.18s ease !important;
+}}
+
+[data-testid="stSidebarCollapseButton"] button:hover {{
+  background: {CARD} !important;
+  border-color: {CLAY} !important;
+}}
+
+[data-testid="stSidebarCollapseButton"] button span,
+[data-testid="stSidebarCollapseButton"] span {{
+  display: none !important;
+  font-size: 0 !important;
+  visibility: hidden !important;
+}}
+
+[data-testid="stSidebarCollapseButton"] button::before {{
+  content: "" !important;
+  display: inline-block !important;
+  width: 16px !important;
+  height: 16px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%235C5145' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m11 17-5-5 5-5'/%3E%3Cpath d='m18 17-5-5 5-5'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+}}
+
+[data-testid="stSidebarCollapseButton"] button::after {{
+  content: "Close" !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  color: {SLATE} !important;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
+  line-height: 1 !important;
 }}
 
 .stButton > button, [data-testid="stDownloadButton"] > button {{
@@ -1102,18 +1236,69 @@ st.set_page_config(
 )
 st.markdown(CSS, unsafe_allow_html=True)
 
+# Persistent client-side script for flawless sidebar toggle interaction
+components.html(
+    """
+    <script>
+        (function() {
+            function syncSidebar() {
+                try {
+                    const pDoc = window.parent.document;
+                    if (!pDoc) return;
+
+                    // Clean up any stray ligature text if found
+                    pDoc.querySelectorAll('[data-testid="collapsedControl"], [data-testid="stSidebarCollapseButton"]').forEach(el => {
+                        el.querySelectorAll('span').forEach(sp => {
+                            if (sp.textContent && (sp.textContent.includes('keyboard_double_arrow') || sp.textContent.includes('_arrow_'))) {
+                                sp.style.display = 'none';
+                                sp.style.fontSize = '0px';
+                            }
+                        });
+                    });
+
+                    // Bind instant click action to the in-page "Open Side Panel" button
+                    const openBtns = pDoc.querySelectorAll('.open-panel-btn-wrap button');
+                    openBtns.forEach(btn => {
+                        if (!btn.dataset.sidebarBound) {
+                            btn.dataset.sidebarBound = "true";
+                            btn.addEventListener('click', function() {
+                                const toggle = pDoc.querySelector('[data-testid="collapsedControl"] button')
+                                            || pDoc.querySelector('[data-testid="collapsedControl"]');
+                                if (toggle) {
+                                    toggle.click();
+                                }
+                            });
+                        }
+                    });
+                } catch (e) {}
+            }
+
+            syncSidebar();
+            try {
+                const pDoc = window.parent.document;
+                if (pDoc && !window.__sidebarSyncObserver) {
+                    window.__sidebarSyncObserver = true;
+                    const observer = new MutationObserver(syncSidebar);
+                    observer.observe(pDoc.body, { childList: true, subtree: true });
+                }
+            } catch (e) {}
+        })();
+    </script>
+    """,
+    height=0,
+    width=0,
+)
+
 if st.session_state.pop("open_sidebar_js", False):
     components.html(
         """
         <script>
-            const pDoc = window.parent.document;
-            const b = pDoc.querySelector('[data-testid="collapsedControl"] button')
-                   || pDoc.querySelector('[data-testid="stSidebarCollapseButton"]')
-                   || pDoc.querySelector('button[kind="headerNoPadding"]')
-                   || pDoc.querySelector('[data-testid="collapsedControl"]');
-            if (b) {
-                b.click();
-            }
+            try {
+                const pDoc = window.parent.document;
+                const b = pDoc.querySelector('[data-testid="collapsedControl"] button')
+                       || pDoc.querySelector('[data-testid="collapsedControl"]');
+                if (b) { b.click(); }
+            } catch(e) {}
         </script>
         """,
         height=0,
