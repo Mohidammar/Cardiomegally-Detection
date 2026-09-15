@@ -33,13 +33,8 @@ from extraction_tool_b import run_tool_b
 try:
     from extraction_tool_a import run_tool_a
     TOOL_A_AVAILABLE = True
-except Exception as e:
+except Exception:
     TOOL_A_AVAILABLE = False
-    TOOL_A_IMPORT_ERROR = str(e)
-
-if not TOOL_A_AVAILABLE:
-    st.sidebar.error(f"Tool A import failed: {TOOL_A_IMPORT_ERROR}")
-
 
 SAMPLES_DIR = "samples"
 
